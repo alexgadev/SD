@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+// Interface exported by the server
+service Insultor {
+
+    rpc AddInsult(String) returns (Empty) {}
+
+    rpc GetInsults(Empty) returns (Array) {}
+
+    rpc InsultMe(Empty) returns (String) {}
+}
+
+message String {
+    string name = 1;
+}
+
+message Empty {}
+
+message Array {
+    repeated string value = 1;
+}
