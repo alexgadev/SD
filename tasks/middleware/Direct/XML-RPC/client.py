@@ -2,6 +2,11 @@ import xmlrpc.client
 
 master = xmlrpc.client.ServerProxy('http://localhost:8000')
 
+csv = 'data.csv'
+
+nRows = 0
+for row in open(csv):
+    nRows += 1
 
 workersURL = master.getWorkers()
 workerList = []
@@ -12,7 +17,7 @@ for w in workersURL:
 
 print('Loading csv...')
 for worker in workerList:
-    worker.read_csv('data.csv')
+    worker.read_csv(csv)
 
 def caps(x):
     return str(x).capitalize
@@ -26,4 +31,3 @@ for elem in workerList:
     #res = elem.items()
     res = elem.apply(caps)
     print(res)
-

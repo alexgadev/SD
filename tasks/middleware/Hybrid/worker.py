@@ -44,13 +44,16 @@ with SimpleXMLRPCServer(('localhost', int(port)), allow_none=True,
             return self.df[label].isin(value)
 
         def items(self):
-            return self.df.items()
+            dictionary = dict()
+            for label, content in self.df.items():
+                dictionary[label] = content
+            return format(dictionary)
 
         def max(self, s):
             return format(self.df.max(s, numeric_only=True))
         
         def min(self, s):
-            return format(self.df.min(s))
+            return format(self.df.min(s, numeric_only=True))
 
     server.register_instance(WorkerAPI())
 
